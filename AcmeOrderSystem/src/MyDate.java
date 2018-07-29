@@ -11,7 +11,7 @@ public class MyDate {
 	}
 	
 	public String toString() {
-		return ""+month+"/"+day+"/"+year;
+		return month+"/"+day+"/"+year;
 	}
 	
 	public void setDate(int m, int d, int y) {
