@@ -6,8 +6,8 @@ public class Car {
 	int serialNumber;
 	static int carCount;
 	{
-		color ="red";
-		type = "celica";
+		this.color ="red";
+		this.type = "celica";
 	}
 	Car(){
 		carCount++;
@@ -15,18 +15,19 @@ public class Car {
 	}
 	
 	Car(String color, String type){
+		this();
 		this.color =color;
 		this.type = type;
 	}
 	
 	String getDescription() {
-		String desc = "This is a "+color+" "+type;
+		String desc = "This is a "+this.color+" "+this.type;
 		return desc;
 	}
 	
-	void customize(String newColor, String newType) {
-		color = newColor;
-		type = newType + " " + type;
+	void customize(String color, String type) {
+		this.color = color;
+		this.type = type + " " + this.type;
 		System.out.println(getDescription());
 	}
 	void start() {
