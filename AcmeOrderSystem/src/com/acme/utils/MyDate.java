@@ -1,8 +1,9 @@
+package com.acme.utils;
 
 public class MyDate {
-	int day;
-	int month;
-	int year;
+	public int day;
+	public int month;
+	public int year;
 	
 	{
 		day = 1;
