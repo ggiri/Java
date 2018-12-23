@@ -10,6 +10,15 @@ public class Jaguar {
 		car.printDescription();
 		Point point = new Point(3,4);
 		System.out.println(point);
+		int x=0, y=0;
+		x= x++;
+		y++;
+		System.out.println("x : y"+ x+y);
+		System.out.println("x : y"+ x+ y);
+		int i =0;
+		while(true) {
+			System.out.println(i++);
+		}
 
 	}
 

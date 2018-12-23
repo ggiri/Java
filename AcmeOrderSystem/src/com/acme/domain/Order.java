@@ -13,6 +13,10 @@ public class Order {
 	int quantity;
 	public static double taxRate;
 	
+	public enum sizes{
+		S, M, L, X
+	}
+	
 	/**
 	 * 
 	 */
@@ -61,6 +65,37 @@ public class Order {
 	public double computeTax() {
 		System.out.println("The tax for this order is: " + orderAmount * Order.taxRate);
 		return orderAmount * Order.taxRate;
+	}
+	
+	public char jobSize() {
+		if(quantity <=25) {
+			return 'S';
+		} else if(quantity <= 75) {
+			return 'M';
+		} else if(quantity <= 150) {
+			return 'L';
+		} 
+		return 'X';
+	}
+	
+	public double computeTotal() {
+		double total = orderAmount;
+		switch(jobSize()) {
+			case 'M': 
+				total = total - (orderAmount * 0.01);
+				break;
+			case 'L':
+				total = total - (orderAmount * 0.02);
+				break;
+			case 'X':
+				total = total - (orderAmount * 0.03);
+				break;
+		}
+		
+		if( orderAmount <= 1500) {
+			total = total + computeTax();
+		}
+		return total;
 	}
 
 }
