@@ -34,6 +34,8 @@ public class TestOrders {
 
 		System.out.println("The total bill for: " + anvil + " is " + anvil.computeTotal());
 		System.out.println("The total bill for: " + balloons + " is " + balloons.computeTotal());
+		
+		balloons.setQuantity(-200);
 	}
 
 }
