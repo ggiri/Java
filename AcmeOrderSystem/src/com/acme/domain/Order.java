@@ -11,7 +11,7 @@ public class Order {
 	private MyDate orderDate;
 	private double orderAmount = 0.00;
 	private String customer;
-	private String product;
+	private Good product;
 
 	public MyDate getOrderDate() {
 		return orderDate;
@@ -41,11 +41,11 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public String getProduct() {
+	public Good getProduct() {
 		return product;
 	}
 
-	public void setProduct(String product) {
+	public void setProduct(Good product) {
 		this.product = product;
 	}
 
@@ -83,7 +83,7 @@ public class Order {
 	 * @param p   Product Name
 	 * @param q   Quantity
 	 */
-	public Order(MyDate d, double amt, String c, String p, int q) {
+	public Order(MyDate d, double amt, String c, Good p, int q) {
 		orderDate = d;
 		orderAmount = amt;
 		customer = c;
@@ -91,9 +91,7 @@ public class Order {
 		quantity = q;
 	}
 
-	public Order(MyDate d, double amt, String c) {
-		this(d, amt, c, "Anvil", 1);
-	}
+	
 
 	public String toString() {
 		return quantity + " ea. " + product + " for " + customer;

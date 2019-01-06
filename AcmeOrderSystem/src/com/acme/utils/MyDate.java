@@ -55,9 +55,9 @@ public class MyDate {
 
 	public void setDate(int m, int d, int y) {
 		if (valid(d, m, y)) {
-			day = (byte)d;
-			month = (byte)m;
-			year = (short)y;
+			day = (byte) d;
+			month = (byte) m;
+			year = (short) y;
 		}
 	}
 
@@ -83,6 +83,16 @@ public class MyDate {
 			return day <= 28 || (day == 29 && year % 4 == 0);
 		}
 		return true;
+	}
+
+	public boolean equals(Object o) {
+		if (o instanceof MyDate) {
+			MyDate d = (MyDate) o;
+			if ((d.day == day) && (d.month == month) && (d.year == year)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
