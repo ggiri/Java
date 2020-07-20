@@ -1,9 +1,13 @@
 package com.acme.testing;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
 import com.acme.domain.Good;
+import com.acme.domain.Good.UnitOfMeasureType;
 import com.acme.domain.Liquid;
 import com.acme.domain.Solid;
-import com.acme.domain.Good.UnitOfMeasureType;
 
 public class TestGoods {
 
@@ -29,5 +33,20 @@ public class TestGoods {
 		System.out.println(paint + " can ship via Post office?" + paint.canShipViaPostOffice());
 		int a = 0x5_2;
 		System.out.println("testing underscore "+ a);
+		System.out.println(Good.getCatalog());
+		
+		Solid toaster = new Solid("Acme Toaster", 1755, 0.75,
+		UnitOfMeasureType.CUBIC_FEET, false, 1.0, 1.0, 1.0);
+		Good.getCatalog().add(toaster);
+		Good.getCatalog().add(toaster);
+		System.out.println(Good.getCatalog());
+		System.out.println("Flammable products: " +
+				Good.flammablesList());
+
+//		 Collections.sort((Set<Good>) Good.getCatalog());
+		 System.out.println(Good.getCatalog());
+
+
 	}
+	
 }

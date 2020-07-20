@@ -4,6 +4,29 @@ public class MyDate {
 	private byte day;
 	private byte month;
 	private short year;
+	private static MyDate[] holidays;
+	
+	static {
+		holidays = new MyDate[6];
+		holidays[0] = new MyDate(1, 1, 2016);
+		holidays[1] = new MyDate(5, 30, 2016);
+		holidays[2] = new MyDate(7, 4, 2016);
+		holidays[3] = new MyDate(9, 5, 2016);
+		holidays[4] = new MyDate(11, 24, 2016);
+		holidays[5] = new MyDate(12, 25, 2016);
+	}
+	
+	public static MyDate[] getHolidays(){
+		return holidays;
+	}
+
+	public static void listHolidays() {
+		System.out.println("the holidays are:");
+		for (int x = 0; x < holidays.length; x++){
+			System.out.println(holidays[x]);
+		}
+	}
+
 
 	public int getDay() {
 		return day;

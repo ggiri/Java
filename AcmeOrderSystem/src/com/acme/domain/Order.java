@@ -1,5 +1,6 @@
 package com.acme.domain;
 
+import com.acme.utils.HolidayOrdersNotAllowedException;
 import com.acme.utils.MyDate;
 
 /**
@@ -11,14 +12,21 @@ public class Order {
 	private MyDate orderDate;
 	private double orderAmount = 0.00;
 	private String customer;
-	private Good product;
+	private Product product;
+	private static Rushable rushable;
+
 
 	public MyDate getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(MyDate orderDate) {
-		this.orderDate = orderDate;
+	public void setOrderDate(MyDate orderDate) throws HolidayOrdersNotAllowedException{
+		if (isHoliday(orderDate)) {
+			System.out.println("Order date, " + orderDate + ", cannot be set to a holiday!");
+			throw new HolidayOrdersNotAllowedException(orderDate);
+		} else {
+			this.orderDate = orderDate;
+		}
 	}
 
 	public double getOrderAmount() {
@@ -41,7 +49,7 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public Good getProduct() {
+	public Product getProduct() {
 		return product;
 	}
 
@@ -83,8 +91,17 @@ public class Order {
 	 * @param p   Product Name
 	 * @param q   Quantity
 	 */
-	public Order(MyDate d, double amt, String c, Good p, int q) {
-		orderDate = d;
+	public Order(MyDate d, double amt, String c, Product p, int q) {
+		try {
+			 setOrderDate(d);
+		} catch (HolidayOrdersNotAllowedException e){
+			System.out.println("The order date for an order cannot be a holiday! Application closing.");
+			System.exit(0);
+//			Note: Calling System.exit(0) is rarely an appropriate way to handle an exception.
+//			Handling an exception usually requires the exception to be logged, informing the user
+//			of the issue, and then seeking appropriate action from the user (in this case perhaps
+//			picking a new order date).
+		}
 		orderAmount = amt;
 		customer = c;
 		product = p;
@@ -146,5 +163,31 @@ public class Order {
 		}
 		return total;
 	}
+
+	public static Rushable getRushable() {
+		return rushable;
+	}
+
+	public static void setRushable(Rushable rushable) {
+		Order.rushable = rushable;
+	}
+	
+	public boolean isPriorityOrder() {
+		boolean priorityOrder = false;
+		if (rushable != null) {
+			priorityOrder = rushable.isRushable(orderDate, orderAmount);
+		}
+		return priorityOrder;
+	}
+	private boolean isHoliday(MyDate proposedDate) {
+		boolean result = false;
+		for (MyDate holiday : MyDate.getHolidays()) {
+			if( holiday.equals(proposedDate) ) {
+				result = true;
+			}
+		}
+		return result;
+	}
+
 
 }
